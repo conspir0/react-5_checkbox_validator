@@ -34,7 +34,7 @@ body {
   font-weight: 800;
   line-height: 25px;
   text-align: center;
-  word-break: break-all;
+  /* word-break: break-all; */
   /* letter-spacing: 1px; */
 }
 

@@ -1,16 +1,34 @@
 class App extends React.Component {
   state = {
-    isChecked: false
+    isChecked: false,
+    isValidated: false,
   }
 
   inputHandler = (e) => {
-    this.setState((prevState) => ({
-      isChecked: !prevState.isChecked
-    }))
+    if (this.state.isChecked) {
+      this.setState((prevState) => ({
+        isChecked: !prevState.isChecked,
+        isValidated: false
+      }))
+    } else {
+      this.setState((prevState) => ({
+        isChecked: !prevState.isChecked
+      }))
+    }
+  }
+
+  buttonHandler = () => {
+    const { isChecked, isValidated } = this.state;
+
+    if (isChecked && !isValidated) {
+      this.setState((prevState) => ({
+        isValidated: !prevState.isValidated
+      }))
+    }
   }
 
   render() {
-    const { isChecked } = this.state;
+    const { isChecked, isValidated } = this.state;
 
     return (
       <React.Fragment>
@@ -22,7 +40,8 @@ class App extends React.Component {
             isChecked={isChecked}
             inputEvent={this.inputHandler}
           />
-          {isChecked && <ResultContainer />}
+          <ButtonForm clickEvent={this.buttonHandler} />
+          {isValidated && <ResultContainer />}
         </div>
       </React.Fragment>
     )
@@ -32,7 +51,7 @@ class App extends React.Component {
 const ResultContainer = ({ }) => {
   return (
     <div className="result-container">
-      Nope. Go back and code.
+      There is no better team than the Arsenal.
     </div>
   )
 }
@@ -45,8 +64,20 @@ const InputCheckbox = ({ isChecked, inputEvent }) => {
         checked={isChecked}
         onChange={inputEvent}
       />
-            I'm master React Developer
+            You have to check me before know my secret!
     </label>
+  )
+}
+
+const ButtonForm = ({ clickEvent }) => {
+  return (
+    <button
+      className="button"
+      onClick={clickEvent}
+    >
+
+      Show secret
+    </button>
   )
 }
 
