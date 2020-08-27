@@ -17,14 +17,14 @@ body {
 .container {
   display: flex;
   flex-direction: column;
-  max-width: 300px;
+  max-width: 400px;
   height: 100%;
   margin: 0 auto;
   padding: 100px 0;
 }
 
 .result-container {
-  max-width: 300px;
+  max-width: 400px;
   min-height: 85px;
   padding: 30px;
   border-radius: 5px;
@@ -35,7 +35,7 @@ body {
   line-height: 25px;
   text-align: center;
   word-break: break-all;
-  letter-spacing: 1px;
+  /* letter-spacing: 1px; */
 }
 
 .button-container .button {
@@ -74,6 +74,26 @@ body {
   outline: none;
 }
 
+.label-checkbox {
+  font-size: 15px;
+  line-height: 20px;
+  color: rgb(72, 126, 176);
+  cursor: pointer;
+}
+
+.label-checkbox input {
+  margin-right: 15px;
+  margin-bottom: 15px;
+  cursor: pointer;
+}
+
 .result-box {
   text-align: left;
+}
+
+.title-container {
+  font-size: 35px;
+  font-weight: 800;
+  line-height: 40px;
+  color: rgb(72, 126, 176);
 }
