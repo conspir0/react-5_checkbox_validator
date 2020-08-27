@@ -1,34 +1,31 @@
 class App extends React.Component {
   state = {
     isChecked: false,
-    isValidated: false,
+    isSubmitted: false,
   }
 
   inputHandler = (e) => {
-    if (this.state.isChecked) {
-      this.setState((prevState) => ({
-        isChecked: !prevState.isChecked,
-        isValidated: false
-      }))
-    } else {
-      this.setState((prevState) => ({
-        isChecked: !prevState.isChecked
-      }))
-    }
+    this.setState((prevState) => ({
+      isChecked: !prevState.isChecked,
+      isSubmitted: false
+    }))
   }
 
   buttonHandler = () => {
-    const { isChecked, isValidated } = this.state;
+    const { isChecked, isSubmitted } = this.state;
 
-    if (isChecked && !isValidated) {
+    if (isChecked && isSubmitted) {
+      return null
+    }
+    else if (!isSubmitted) {
       this.setState((prevState) => ({
-        isValidated: !prevState.isValidated
+        isSubmitted: !prevState.isSubmitted
       }))
     }
   }
 
   render() {
-    const { isChecked, isValidated } = this.state;
+    const { isChecked, isSubmitted } = this.state;
 
     return (
       <React.Fragment>
@@ -41,19 +38,27 @@ class App extends React.Component {
             inputEvent={this.inputHandler}
           />
           <ButtonForm clickEvent={this.buttonHandler} />
-          {isValidated && <ResultContainer />}
+          {displayMessage(isChecked, isSubmitted)}
         </div>
       </React.Fragment>
     )
   }
 }
 
-const ResultContainer = ({ }) => {
-  return (
-    <div className="result-container">
-      There is no better team than the Arsenal.
-    </div>
-  )
+const displayMessage = (isChecked, isSubmitted) => {
+  if (isSubmitted && isChecked) {
+    return (
+      <div className="result-container">
+        There is no better team than the Arsenal.
+      </div>
+    )
+  } else if (isSubmitted && !isChecked) {
+    return (
+      <div className="wrong-validation">
+        Wrong validation
+      </div>
+    )
+  }
 }
 
 const InputCheckbox = ({ isChecked, inputEvent }) => {
@@ -75,7 +80,6 @@ const ButtonForm = ({ clickEvent }) => {
       className="button"
       onClick={clickEvent}
     >
-
       Show secret
     </button>
   )
